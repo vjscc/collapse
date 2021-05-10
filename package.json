@@ -1,0 +1,50 @@
+{
+  "name": "gm-collapse",
+  "version": "0.1.0",
+  "description": "collapse component",
+  "keywords": [
+    "collapse"
+  ],
+  "author": {
+    "name": "GuTianhuang",
+    "email": "gutianhuang@foxmail.com"
+  },
+  "repository": {
+    "url": "git+https://github.com/Gu-Miao/gm-collapse.git",
+    "type": "git"
+  },
+  "homepage": "https://github.com/Gu-Miao/gm-collapse",
+  "license": "MIT",
+  "files": [
+    "package.json",
+    "README.md",
+    "README_zh.md",
+    "LICENSE",
+    "dist"
+  ],
+  "main": "dist/lib/gm-collapse.min.js",
+  "browser": "dist/browser/gm-collapse.min.js",
+  "module": "dist/es/gm-collapse.js",
+  "scripts": {
+    "start": "parcel ./src/test/index.html --out-dir .cache/tmp",
+    "build:css": "parcel build ./src/style.less --out-dir dist --experimental-scope-hoisting --out-file gm-alert.min.css",
+    "build:js": "rollup -c",
+    "build": "npm run build:js && npm run build:css"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-eslint": "^8.0.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "less": "^3.12.2",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.1.2",
+    "rollup": "^2.36.1",
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
