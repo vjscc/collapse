@@ -6,7 +6,7 @@ import { terser } from 'rollup-plugin-terser'
 import clear from 'rollup-plugin-clear'
 import pkg from './package.json'
 
-const name = 'GmAlert'
+const name = 'GmCollapse'
 
 export default {
   input: 'src/index.js',

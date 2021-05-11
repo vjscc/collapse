@@ -1,221 +1,215 @@
-# gm-alert
+# gm-collapse
 
-This lib is a JavaScript tool kit of alert. It's dedicated to lightweight, concise and highly customizable. We just give a simple realization of a alert so that you could do what ever you want easily based on it.
+Collapse component without any deps.
 
 [简体中文](./README_zh.md) | **English**
 
 ## Install
 
 ```bash
-npm install gm-alert -S
+npm install gm-collapse -S
 # Or use yarn
-yarn add gm-alert
+yarn add gm-collapse
 ```
 
 Or just use `<script>` tag:
 
 ```html
-<link rel="stylesheet" href="path/to/gm-alert.min.css" />
-<script src="path/to/gm-alert.min.js"></script>
+<link rel="stylesheet" href="path/to/gm-collapse.min.css" />
+<script src="path/to/gm-collapse.min.js"></script>
 ```
 
-To get dist js and css files, please visit [Releases Page](https://github.com/Gu-Miao/gm-alert/releases) or use CDN like `jsDelivr`.
+To get dist js and css files, please visit [Releases Page](https://github.com/Gu-Miao/gm-collapse/releases) or use CDN like `jsDelivr`.
 
 ## Usage
+
+Firstly, you must have a DOM structure like:
+
+```html
+<!-- The container of whole component -->
+<div class="gm-collapse-container">
+  <!-- Collapse item -->
+  <div class="gm-collapse-item">
+    <!-- Header -->
+    <div class="gm-collapse-header">
+      <!-- Title -->
+      <div class="gm-collapse-title">some title...</div>
+      <!-- Right icon -->
+      <i class="gm-collapse-icon"></i>
+    </div>
+    <!-- Body of item, it will hide when item is collapsed -->
+    <div class="gm-collapse-body">
+      <!-- Content area -->
+      <div class="gm-collapse-content">some content...</div>
+    </div>
+  </div>
+
+  <!-- This item is collapsed by default -->
+  <div class="gm-collapse-item collapsed">
+    <div class="gm-collapse-header">
+      <div class="gm-collapse-title">some title...</div>
+      <i class="gm-collapse-icon"></i>
+    </div>
+    <div class="gm-collapse-body">
+      <div class="gm-collapse-content">some content...</div>
+    </div>
+  </div>
+</div>
+```
+
+All the collapse item is not collapsed by default, if you want collapsed item, add className `collapsed` to the right `.gm-collapse-item` element.
 
 If you use `import/require`:
 
 ```js
-import GmAlert from 'gm-alert'
-import 'gm-alert/gm-alert.min.css'
+import Gmcollapse from 'gm-collapse'
+import 'gm-collapse/gm-collapse.min.css'
 
-// Create an alert instance
-const instance = GmAlert({
-  // ...some options
-})
+// Create an collapse instance with selector of container
+// which has a className of `gm-collapse-container`
+const instance = Gmcollapse(selector)
 
-// Show alert
-instance.show()
+// Collapse the first item
+instance.collapse(0)
 
-// Hide alert
-instance.hide()
+// Uncollapse all
+instance.uncollapseAll()
 ```
 
-If you use `<script/>` tag to import, `GmAlert` will be mounted on `window`.
+If you use `<script/>` tag to import, `Gmcollapse` will be mounted on `window`.
 
 > Don't forget to import css file.
 
 ## API
 
-### GmAlert(option)
+### `Gmcollapse(selector)`
 
-Create a new alert instance with options:
+Create a new collapse instance with selector
 
-| option          | type                  | description                              | default value       |
-| --------------- | --------------------- | ---------------------------------------- | ------------------- |
-| header          | `string\|HTMLElement` | header of modal                          | `''`                |
-| headerClassName | `string`              | extra class for title element            | `''`                |
-| body            | `string\|HTMLElement` | body of modal                            | `''`                |
-| bodyClassName   | `string`              | extra class for body element             | `''`                |
-| showFooter      | `boolean`             | show footer or not                       | `true`              |
-| footerClassName | `string`              | extra class for footer element           | `''`                |
-| okText          | `string`              | text of ok button                        | `'ok'`              |
-| onOK            | `function`            | callback when you click ok button        | `() => this.hide()` |
-| cancelText      | `string`              | text of cancel button                    | `'cancel'`          |
-| onCancel        | `function`            | callback when you click cancel button    | `() => this.hide()` |
-| maskClosAble    | `boolean`             | call `onCancel` when click mask of modal | true                |
-| isShow          | `boolean`             | show alert or not                        | false               |
+- `selector` **{ string }**
 
-It will return an alert instance, the relationship between them is:
+Selector of container, a string.
+
+It will return an collapse instance, the relationship between them is:
 
 ```js
-instance.__proto = GmAlert.prototype
+instance.__proto__ = Gmcollapse.prototype
 ```
 
-So that instance could use all of prototype methods on `GmAlert`.
+So that instance could use all of prototype methods on `Gmcollapse`.
 
 Instance will have those properties:
 
 ```js
-GmAlert {
-  $body
-  $cancel
-  $footer
-  $header
-  $mask
-  $modal
-  $ok
-  isShow,
-  id
+Gmcollapse {
+  container // container HTMLElement
 }
 ```
 
-Properties start with `$` means it is a HTML element and you could operate it directly. In version 2.0.0, We had exposed all of options on instance but they were useless and unreactive after initialization, thus, they were removed.
+> The `this` below means the instance created by `Gmcollapse()`.
 
-- We use `header` instead of `title` because we are considering changing the DOM structure of top part in modal:
+### `this.container`
 
-```
-div[data-role='header']
-  |
-  +--div[data-role='title']
-  |
-  +--button[data-role='close']
-```
+The container of whole collapse component.
 
-Obviously, this is more semantic.
+### `Gmcollapse.prototype.getItemAndBody(index)`
 
-- Type of `header` and `body` had been changed to `string|HTMLElement`, if you give a string, we will change its `innerHTML`, otherwise we'll call `append()` to insert coming content.
+Get collapse item and body element of this item.
 
-- `onOK` and `onCancel` will recevie alert instance as first argument.
+- `index` **{ number }**
 
-- You could use `document.querySelector('gm-alert-' + id)` to get container of alert HTML node.
+Serial number of collapse you want get.
 
-> The `this` below means the instance created by `GmAlert()`.
+- `return` **{ IObj }**
 
-### this.isShow
+Return a object which has property `collapseItem` and `body`, the interface is showing below:
 
-You can toggle alert by change `this.isShow` to another truthy value. And you could also judge status of alert with it.
-
-### GmAlert.prototype.show()
-
-Show alert and change `this.isShow` to `true`.
-
-### GmAlert.prototype.hide()
-
-Hide alert and change `this.isShow` to `false`.
-
-### GmAlert.prototype.setHeader(header[, headerClassName])
-
-Set header content and extra classnames.
-
-- `header` **{ string\|HTMLElement }**
-
-Content of header, it could be a string or a HTML element.
-
-- `headerClassName` **{ string }** _optional_
-
-Extra classnames for header, and if you have extra classname before and `headerClassName` is not truthy, we'll not change it.
-
-### GmAlert.prototype.setBody(body[, bodyClassName])
-
-Set body content and extra classnames.
-
-- `body` **{ string\|HTMLElement }**
-
-Content of body, it could be a string or a HTML element.
-
-- `bodyClassName` **{ string }** _optional_
-
-Extra classnames for body, and if you have extra classname before and `bodyClassName` is not truthy, we'll not change it.
-
-### GmAlert.prototype.setFooter(showFooter[, footerClassName])
-
-Set footer show or not and extra classnames.
-
-- `showFooter` **{ boolean }**
-
-Show footer or not, it is controlled by `dispaly: none` so that it won't influence butons in footer even if footer is not show.
-
-- `footerClassName` **{ string }** _optional_
-
-Extra classnames for footer, and if you have extra classname before and `footerClassName` is not truthy, we'll not change it.
-
-### GmAlert.prototype.setOK(okText[, onOK])
-
-Set inner content and click listener of ok button.
-
-- `okText` **{ string }**
-
-Inner content of ok button, default is `ok`.
-
-- `onOK` **{ function }** _optional_
-
-Callback when you click ok button, it will recive alert instance as first argument.
-
-### GmAlert.prototype.setCancel(cancelText[, onCancel])
-
-Set body content and extra classnames.
-
-Set inner content and click listener of cancel button.
-
-- `cancelText` **{ string }**
-
-Inner content of ok button, default is `cancel`.
-
-- `onCancel` **{ function }** _optional_
-
-Callback when you click cancel button, it will recive alert instance as first argument. And pay attention that `() => this.hide()` will be called before `onCancel()`.
-
-## DOM Structure
-
-To aviod style conflict causing by same classnames, we use `data-role` instead of `class`:
-
-```
-div.gm-alert-mask
-  |
-  +--div[data-role='modal']
-       |
-       +--div[data-role='header']
-       |
-       +--div[data-role='body']
-       |
-       +--div[data-role='footer']
-            |
-            +--button[data-role='ok']
-            |
-            +--button[data-role='button']
+```ts
+interface IObj {
+  body: HTMLElement
+  collapseItem: HTMLELement
+}
 ```
 
-## History versions documents
+### `Gmcollapse.prototype.getAllItems()`
 
-Please visit [this](./docs/history.md).
+Get all collapse items by `element.querySelectorAll()`.
 
-## Coming soon
+- `return` **{ NodeList }**
 
-- Prototype methods changes and optimization.
-- `extend()` to extend alert.
-- Hooks for status change listener.
-- Plugin interface.
+Return all collapse items.
+
+### `Gmcollapse.prototype.isCollapsed(index)`
+
+Check if this item is collapsed.
+
+- `index` **{ number }**
+
+Serial number of collapse item you want get.
+
+- `return` **{ Boolean }**
+
+The result of whether it's collapsed or not.
+
+### `Gmcollapse.prototype.collapse(index)`
+
+Collapse a item, if it's already collapsed, then do nothing.
+
+- `index` **{ number }**
+
+Serial number of collapse item you want get.
+
+- `return` **{ GmCollapse }**
+
+Return the instance itself.
+
+### `Gmcollapse.prototype.collapseAll()`
+
+Collapse all the items, if a item is already collapsed, then do nothing to it.
+
+- `return` **{ GmCollapse }**
+
+Return the instance itself.
+
+### `Gmcollapse.prototype.uncollapse(index)`
+
+Unollapse a item, if it's not collapsed, then do nothing.
+
+- `index` **{ number }**
+
+Serial number of collapse item you want get.
+
+- `return` **{ GmCollapse }**
+
+Return the instance itself.
+
+### `Gmcollapse.prototype.uncollapseAll()`
+
+Uncollapse all the items, if a item is not collapsed, then do nothing to it.
+
+- `return` **{ GmCollapse }**
+
+Return the instance itself.
+
+### `Gmcollapse.prototype.collapse(index)`
+
+Toggle a item to collapsed or not.
+
+- `index` **{ number }**
+
+Serial number of collapse item you want get.
+
+- `return` **{ GmCollapse }**
+
+Return the instance itself.
+
+### `Gmcollapse.prototype.toggleAll()`
+
+Toggle all the items.
+
+- `return` **{ GmCollapse }**
+
+Return the instance itself.
 
 ## License
 

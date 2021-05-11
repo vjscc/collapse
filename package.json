@@ -1,7 +1,7 @@
 {
   "name": "gm-collapse",
-  "version": "0.1.0",
-  "description": "collapse component",
+  "version": "1.0.0",
+  "description": "Collapse component without any deps",
   "keywords": [
     "collapse"
   ],
@@ -27,7 +27,7 @@
   "module": "dist/es/gm-collapse.js",
   "scripts": {
     "start": "parcel ./src/test/index.html --out-dir .cache/tmp",
-    "build:css": "parcel build ./src/style.less --out-dir dist --experimental-scope-hoisting --out-file gm-alert.min.css",
+    "build:css": "parcel build ./src/style.less --out-dir dist --experimental-scope-hoisting --out-file gm-collapse.min.css",
     "build:js": "rollup -c",
     "build": "npm run build:js && npm run build:css"
   },
