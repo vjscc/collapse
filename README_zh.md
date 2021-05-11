@@ -82,7 +82,7 @@ instance.uncollapseAll()
 
 ## API
 
-### `Gmcollapse(selector)`
+### Gmcollapse(selector)
 
 创建一个组件实例。
 
@@ -108,11 +108,11 @@ Gmcollapse {
 
 > 下文提的 `this` 指使用 `Gmcollapse()` 创建的实例对象。
 
-### `this.container`
+### this.container
 
 容器元素。
 
-### `Gmcollapse.prototype.getItemAndBody(index)`
+### Gmcollapse.prototype.getItemAndBody(index)
 
 获取一个可折叠元素和他的主体元素。
 
@@ -131,7 +131,7 @@ interface IObj {
 }
 ```
 
-### `Gmcollapse.prototype.getAllItems()`
+### Gmcollapse.prototype.getAllItems()
 
 获取所有可折叠元素，这里用了 `element.querySelectorAll()`。
 
@@ -139,7 +139,7 @@ interface IObj {
 
 返回所有的可折叠元素。
 
-### `Gmcollapse.prototype.isCollapsed(index)`
+### Gmcollapse.prototype.isCollapsed(index)
 
 判断该元素是否已经折叠。
 
@@ -151,7 +151,7 @@ interface IObj {
 
 是否已折叠。
 
-### `Gmcollapse.prototype.collapse(index)`
+### Gmcollapse.prototype.collapse(index)
 
 折叠一个元素，如果它已经折叠，那就什么都不做。
 
@@ -163,7 +163,7 @@ interface IObj {
 
 返回实例本身。
 
-### `Gmcollapse.prototype.collapseAll()`
+### Gmcollapse.prototype.collapseAll()
 
 折叠所有元素，如果其中有些元素已经折叠，那么已经折叠的不会变化。
 
@@ -171,7 +171,7 @@ interface IObj {
 
 返回实例本身。
 
-### `Gmcollapse.prototype.uncollapse(index)`
+### Gmcollapse.prototype.uncollapse(index)
 
 展开一个元素，如果它已经展开，那就什么都不做。
 
@@ -183,7 +183,7 @@ interface IObj {
 
 返回实例本身。
 
-### `Gmcollapse.prototype.uncollapseAll()`
+### Gmcollapse.prototype.uncollapseAll()
 
 展开所有元素，如果其中有些元素已经展开，那么已经展开的不会变化。
 
@@ -191,7 +191,7 @@ interface IObj {
 
 返回实例本身。
 
-### `Gmcollapse.prototype.collapse(index)`
+### Gmcollapse.prototype.collapse(index)
 
 切换一个元素的展开/折叠状态。
 
@@ -203,7 +203,7 @@ interface IObj {
 
 返回实例本身。
 
-### `Gmcollapse.prototype.toggleAll()`
+### Gmcollapse.prototype.toggleAll()
 
 切换所有元素的展开/折叠状态。
 

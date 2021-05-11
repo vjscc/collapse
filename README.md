@@ -82,7 +82,7 @@ If you use `<script/>` tag to import, `Gmcollapse` will be mounted on `window`.
 
 ## API
 
-### `Gmcollapse(selector)`
+### Gmcollapse(selector)
 
 Create a new collapse instance with selector
 
@@ -108,11 +108,11 @@ Gmcollapse {
 
 > The `this` below means the instance created by `Gmcollapse()`.
 
-### `this.container`
+### this.container
 
 The container of whole collapse component.
 
-### `Gmcollapse.prototype.getItemAndBody(index)`
+### Gmcollapse.prototype.getItemAndBody(index)
 
 Get collapse item and body element of this item.
 
@@ -131,7 +131,7 @@ interface IObj {
 }
 ```
 
-### `Gmcollapse.prototype.getAllItems()`
+### Gmcollapse.prototype.getAllItems()
 
 Get all collapse items by `element.querySelectorAll()`.
 
@@ -139,7 +139,7 @@ Get all collapse items by `element.querySelectorAll()`.
 
 Return all collapse items.
 
-### `Gmcollapse.prototype.isCollapsed(index)`
+### Gmcollapse.prototype.isCollapsed(index)
 
 Check if this item is collapsed.
 
@@ -151,7 +151,7 @@ Serial number of collapse item you want get.
 
 The result of whether it's collapsed or not.
 
-### `Gmcollapse.prototype.collapse(index)`
+### Gmcollapse.prototype.collapse(index)
 
 Collapse a item, if it's already collapsed, then do nothing.
 
@@ -163,7 +163,7 @@ Serial number of collapse item you want get.
 
 Return the instance itself.
 
-### `Gmcollapse.prototype.collapseAll()`
+### Gmcollapse.prototype.collapseAll()
 
 Collapse all the items, if a item is already collapsed, then do nothing to it.
 
@@ -171,7 +171,7 @@ Collapse all the items, if a item is already collapsed, then do nothing to it.
 
 Return the instance itself.
 
-### `Gmcollapse.prototype.uncollapse(index)`
+### Gmcollapse.prototype.uncollapse(index)
 
 Unollapse a item, if it's not collapsed, then do nothing.
 
@@ -183,7 +183,7 @@ Serial number of collapse item you want get.
 
 Return the instance itself.
 
-### `Gmcollapse.prototype.uncollapseAll()`
+### Gmcollapse.prototype.uncollapseAll()
 
 Uncollapse all the items, if a item is not collapsed, then do nothing to it.
 
@@ -191,7 +191,7 @@ Uncollapse all the items, if a item is not collapsed, then do nothing to it.
 
 Return the instance itself.
 
-### `Gmcollapse.prototype.collapse(index)`
+### Gmcollapse.prototype.collapse(index)
 
 Toggle a item to collapsed or not.
 
@@ -203,7 +203,7 @@ Serial number of collapse item you want get.
 
 Return the instance itself.
 
-### `Gmcollapse.prototype.toggleAll()`
+### Gmcollapse.prototype.toggleAll()
 
 Toggle all the items.
 
