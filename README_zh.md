@@ -1,216 +1,50 @@
-# gm-collapse
+# @vjscc/collapse
 
-无任何依赖的折叠组件。
+原生 JavaScript 弹出层组件。
+
+![npm](https://img.shields.io/npm/v/@vjscc/collapse?logo=npm&style=flat-square)
+![npm type definitions](https://img.shields.io/npm/types/@vjscc/collapse?logo=typescript&style=flat-square)
+![npm bundle size](https://img.shields.io/bundlephobia/min/@vjscc/collapse?logo=npm&style=flat-square)
+![GitHub](https://img.shields.io/github/license/vjscc/collapse?logo=github&style=flat-square)
+
+<!-- ![Codecov](https://img.shields.io/codecov/c/github/vjscc/collapse?logo=codecov&style=flat-square) -->
 
 **简体中文** | [English](./README.md)
 
-## 安装
+# 安装和引入
+
+如果你想和打包工具比如 `webpack` 一起使用并使用 `commonjs` 或 `ESM` 的方式来引入库，你可以用 `npm` 或 `yarn` 来安装。
+
+使用 npm:
 
 ```bash
-npm install gm-collapse -S
-# 或者使用 Yarn
-yarn add gm-collapse
+npm install @vjscc/collapse -S
 ```
 
-用 `<script>` 标签引入 JS：
+或者使用 yarn:
 
-```html
-<link rel="stylesheet" href="路径/gm-collapse.min.css" />
-<script src="路径/gm-collapse.min.js"></script>
+```bash
+yarn add @vjscc/collapse
 ```
 
-你可以从 [Release Page](https://github.com/Gu-Miao/gm-collapse/releases) 获取打包后的 `css` 和 `js，当然你也可以使用类似` `jsDelivr` 这样的 CDN 服务。
+接下来引入库和样式:
 
-## 使用
+```javascript
+// 使用 commonjs。
+const Vjscccollapse = require('@vjscc/collapse')
+require('@vjscc/collapse/dist/collapse.min.css')
 
-首先，你需要有下面一样的 DOM 结构：
-
-```html
-<!-- 容器元素 -->
-<div class="gm-collapse-container">
-  <!-- 可折叠元素 -->
-  <div class="gm-collapse-item">
-    <!-- 头部 -->
-    <div class="gm-collapse-header">
-      <!-- 标题 -->
-      <div class="gm-collapse-title">some title...</div>
-      <!-- 右侧图标 -->
-      <i class="gm-collapse-icon"></i>
-    </div>
-    <!-- 主体区域，折叠时隐藏 -->
-    <div class="gm-collapse-body">
-      <!-- 内容区域 -->
-      <div class="gm-collapse-content">some content...</div>
-    </div>
-  </div>
-
-  <!-- 这个元素默认已折叠 -->
-  <div class="gm-collapse-item collapsed">
-    <div class="gm-collapse-header">
-      <div class="gm-collapse-title">some title...</div>
-      <i class="gm-collapse-icon"></i>
-    </div>
-    <div class="gm-collapse-body">
-      <div class="gm-collapse-content">some content...</div>
-    </div>
-  </div>
-</div>
+// 使用 ESM。
+import Vjscccollapse from '@vjscc/collapse'
+import '@vjscc/collapse/dist/collapse.min.css'
 ```
 
-所有可折叠元素默认展开，如果你想某一项默认折叠，你可以给对应的 `.gm-collapse-item` 元素添加 `collapsed` 类。
+> 我们为不同的引入方式提供 3 个版本：`UMD`，`ESM` 和 `browser`，阅读 [package.json](./package.json) 来获取打包后的路径。
 
-如果你使用 `ES Module` 或者 `Common.js`：
+如果你想使用 `<link>` 和 `<script>` 标签来引入，你可以从 [Github Release 页面](https://github.com/vjscc/collapse/release) 下载代码或者使用像 [jsdelivr](https://www.jsdelivr.com/) 这样的 CDN。
 
-```js
-import Gmcollapse from 'gm-collapse'
-import 'gm-collapse/gm-collapse.min.css'
+> `UMD` 版本是未压缩的，`browser` 版本则是压缩过的，通常，我们建议使用 `browser` 版本。`ESM` 版本是非常接近源码，它是给那些支持 ESM 引入的打包工具用的。 `CSS` 只提供压缩版本。
 
-// 通过容器元素的选择器创建一个组件实例，容器
-// 要有一个 `gm-collapse-container` 类名
-const instance = Gmcollapse(selector)
-
-// 折叠第一个元素
-instance.collapse(0)
-
-// 展开所有元素
-instance.uncollapseAll()
-```
-
-如果你用 `<script/>` 标签引用 JS，`Gmcollapse` 会挂载到 `window` 上。
-
-> 别忘了引入 CSS 文件。
-
-## API
-
-### Gmcollapse(selector)
-
-创建一个组件实例。
-
-- `selector` **{ string }**
-
-容器元素的选择器。
-
-这个方法会返回一个组件实例，它们的关系为：
-
-```js
-instance.__proto__ = Gmcollapse.prototype
-```
-
-因而实例可以使用 `GmCollapse` 上的所有原型方法。
-
-实例上的属性：
-
-```js
-Gmcollapse {
-  container // 容器元素
-}
-```
-
-> 下文提的 `this` 指使用 `Gmcollapse()` 创建的实例对象。
-
-### this.container
-
-容器元素。
-
-### Gmcollapse.prototype.getItemAndBody(index)
-
-获取一个可折叠元素和他的主体元素。
-
-- `index` **{ number }**
-
-折叠元素的索引。
-
-- `return` **{ IObj }**
-
-返回一个包含可折叠元素和主题元素的对象，接口如下所示：
-
-```ts
-interface IObj {
-  body: HTMLElement
-  collapseItem: HTMLELement
-}
-```
-
-### Gmcollapse.prototype.getAllItems()
-
-获取所有可折叠元素，这里用了 `element.querySelectorAll()`。
-
-- `return` **{ NodeList }**
-
-返回所有的可折叠元素。
-
-### Gmcollapse.prototype.isCollapsed(index)
-
-判断该元素是否已经折叠。
-
-- `index` **{ number }**
-
-元素索引。
-
-- `return` **{ Boolean }**
-
-是否已折叠。
-
-### Gmcollapse.prototype.collapse(index)
-
-折叠一个元素，如果它已经折叠，那就什么都不做。
-
-- `index` **{ number }**
-
-元素索引
-
-- `return` **{ GmCollapse }**
-
-返回实例本身。
-
-### Gmcollapse.prototype.collapseAll()
-
-折叠所有元素，如果其中有些元素已经折叠，那么已经折叠的不会变化。
-
-- `return` **{ GmCollapse }**
-
-返回实例本身。
-
-### Gmcollapse.prototype.uncollapse(index)
-
-展开一个元素，如果它已经展开，那就什么都不做。
-
-- `index` **{ number }**
-
-元素索引。
-
-- `return` **{ GmCollapse }**
-
-返回实例本身。
-
-### Gmcollapse.prototype.uncollapseAll()
-
-展开所有元素，如果其中有些元素已经展开，那么已经展开的不会变化。
-
-- `return` **{ GmCollapse }**
-
-返回实例本身。
-
-### Gmcollapse.prototype.collapse(index)
-
-切换一个元素的展开/折叠状态。
-
-- `index` **{ number }**
-
-元素索引。
-
-- `return` **{ GmCollapse }**
-
-返回实例本身。
-
-### Gmcollapse.prototype.toggleAll()
-
-切换所有元素的展开/折叠状态。
-
-- `return` **{ GmCollapse }**
-
-返回实例本身。
-
-## 许可证
+# 许可证
 
 MIT

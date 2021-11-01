@@ -1,20 +1,19 @@
 {
-  "name": "gm-collapse",
-  "version": "1.0.0",
-  "description": "Collapse component without any deps",
+  "name": "@vjscc/collapse",
+  "version": "0.1.0",
+  "license": "MIT",
   "keywords": [
+    "vjscc",
     "collapse"
   ],
-  "author": {
-    "name": "GuTianhuang",
-    "email": "gutianhuang@foxmail.com"
-  },
   "repository": {
-    "url": "git+https://github.com/Gu-Miao/gm-collapse.git",
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/vjscc/collapse.git"
   },
-  "homepage": "https://github.com/Gu-Miao/gm-collapse",
-  "license": "MIT",
+  "homepage": "https://github.com/vjscc/collapse#readme",
+  "bugs": {
+    "url": "https://github.com/vjscc/collapse/issues"
+  },
   "files": [
     "package.json",
     "README.md",
@@ -22,29 +21,42 @@
     "LICENSE",
     "dist"
   ],
-  "main": "dist/lib/gm-collapse.min.js",
-  "browser": "dist/browser/gm-collapse.min.js",
-  "module": "dist/es/gm-collapse.js",
+  "global": "VjsccCollapse",
+  "types": "dist/collapse.d.ts",
+  "main": "dist/collapse.js",
+  "browser": "dist/browser/collapse.min.js",
+  "module": "dist/es/collapse.js",
   "scripts": {
-    "start": "parcel ./src/test/index.html --out-dir .cache/tmp",
-    "build:css": "parcel build ./src/style.less --out-dir dist --experimental-scope-hoisting --out-file gm-collapse.min.css",
-    "build:js": "rollup -c",
-    "build": "npm run build:js && npm run build:css"
+    "start": "parcel ./src/test/index.html --cache-dir node_modules/.parcel --out-dir node_modules/.parcel",
+    "build:js": "rollup -c && node scripts/removeRedundancyDeclarations.js",
+    "build:css": "parcel build ./src/index.less --out-dir dist --experimental-scope-hoisting --out-file collapse.min.css --cache-dir node_modules/.parcel",
+    "build": "npm run build:js && npm run build:css",
+    "pretest": "npm run build",
+    "jest": "jest",
+    "test": "parcel ./test/index.html --cache-dir node_modules/.parcel --out-dir node_modules/.parcel",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@vjscc/utils": "^0.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/preset-env": "^7.12.7",
-    "@rollup/plugin-babel": "^5.2.2",
-    "@rollup/plugin-eslint": "^8.0.1",
-    "eslint-config-prettier": "^7.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "less": "^3.12.2",
-    "parcel-bundler": "^1.12.4",
-    "prettier": "^2.1.2",
-    "rollup": "^2.36.1",
+    "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.2.4",
+    "less": "^4.1.1",
+    "parcel-bundler": "^1.12.5",
+    "prettier": "^2.4.1",
+    "rollup": "^2.57.0",
     "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-ts": "^1.4.7",
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3"
   }
 }

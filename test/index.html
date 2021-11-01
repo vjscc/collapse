@@ -4,50 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>test page</title>
-    <link rel="stylesheet" href="../dist/gm-collapse.min.css" />
+    <link rel="stylesheet" href="../dist/collapse.min.css" />
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <h1>Test Page</h1>
-    <div class="gm-collapse-container" id="container">
-      <div class="gm-collapse-item collapsed">
-        <div class="gm-collapse-header">
-          <div class="gm-collapse-title">asdf</div>
-          <i class="gm-collapse-icon"></i>
+    <div class="vjscc-collapse-container">
+      <!-- 可折叠元素 -->
+      <div class="vjscc-collapse-item">
+        <!-- 头部 -->
+        <div class="vjscc-collapse-header">
+          <!-- 标题 -->
+          <div class="vjscc-collapse-title">some title...</div>
+          <!-- 右侧图标 -->
+          <i class="vjscc-collapse-icon"></i>
         </div>
-        <div class="gm-collapse-body">
-          <div class="gm-collapse-content">asdfasdfa</div>
-        </div>
-      </div>
-      <div class="gm-collapse-item">
-        <div class="gm-collapse-header">
-          <div class="gm-collapse-title">asdf</div>
-          <i class="gm-collapse-icon"></i>
-        </div>
-        <div class="gm-collapse-body collapsed">
-          <div class="gm-collapse-content">asdfasdfa</div>
+        <!-- 主体区域，折叠时隐藏 -->
+        <div class="vjscc-collapse-body">
+          <!-- 内容区域 -->
+          <div class="vjscc-collapse-content">some content...</div>
         </div>
       </div>
-      <div class="gm-collapse-item">
-        <div class="gm-collapse-header">
-          <div class="gm-collapse-title">asdf</div>
-          <i class="gm-collapse-icon"></i>
+
+      <!-- 这个元素默认已折叠 -->
+      <div class="vjscc-collapse-item collapsed">
+        <div class="vjscc-collapse-header">
+          <div class="vjscc-collapse-title">some title...</div>
+          <i class="vjscc-collapse-icon"></i>
         </div>
-        <div class="gm-collapse-body">
-          <div class="gm-collapse-content">asdfasdfa</div>
-        </div>
-      </div>
-      <div class="gm-collapse-item">
-        <div class="gm-collapse-header">
-          <div class="gm-collapse-title">asdf</div>
-          <i class="gm-collapse-icon"></i>
-        </div>
-        <div class="gm-collapse-body">
-          <div class="gm-collapse-content">asdfasdfa</div>
+        <div class="vjscc-collapse-body">
+          <div class="vjscc-collapse-content">some content...</div>
         </div>
       </div>
     </div>
   </body>
-  <script src="../dist/browser/gm-collapse.min.js"></script>
+  <script src="../dist/browser/collapse.min.js"></script>
   <script src="./index.js"></script>
 </html>

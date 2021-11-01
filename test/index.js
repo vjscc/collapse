@@ -1,3 +1,5 @@
-var i = window.GmCollapse('#container')
+const collaspe = new window.VjsccCollapse({
+  $container: '.vjscc-collapse-container'
+})
 
-console.log(i)
+window.m = collaspe
